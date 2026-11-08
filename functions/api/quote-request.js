@@ -60,7 +60,9 @@ export async function onRequestPost({ request, env }) {
       }),
     });
     if (!r.ok) return json({ error: 'Our email service had a hiccup.' }, 502);
-    return json({ ok: true });
+    // sent: true tells the page the email really went out, so it can fire the
+    // Google Ads conversion. The spam-trap path above returns ok without it.
+    return json({ ok: true, sent: true });
   } catch (e) {
     return json({ error: 'Could not reach our email service.' }, 502);
   }
