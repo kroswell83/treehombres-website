@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) - Google Ads account 421-301-2911 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18554671497"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18554671497');
+    // "Calls from website" conversion: for visitors who arrived from an ad, Google
+    // supplies a forwarding number. The callback hands it to the page script, which
+    // swaps the visible number and the tel: links (text links keep the real number).
+    gtag('config', 'AW-18554671497/_H87COKv1LQdEImjx49F', {
+      'phone_conversion_number': '(512) 887-8722',
+      'phone_conversion_callback': function(formattedNumber, mobileNumber) {
+        window.thForwardingNumber = { formatted: formattedNumber, mobile: mobileNumber };
+        if (typeof window.thApplyForwardingNumber === 'function') window.thApplyForwardingNumber();
+      }
+    });
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tree Service in Georgetown, TX | Tree Hombres</title>
@@ -395,6 +413,19 @@
       document.querySelectorAll('[data-phone-show]').forEach(el => el.classList.add('hidden'));
     }
 
+    // Google forwarding number swap (set up by the Google tag in <head>).
+    // Only call links change; the "Send a text" link keeps the real number,
+    // because Google forwarding numbers can't receive texts.
+    window.thApplyForwardingNumber = function () {
+      const g = window.thForwardingNumber;
+      if (!g) return;
+      const fwd = String(g.mobile || g.formatted || '').replace(/\D/g, '');
+      if (fwd.length < 10) return;
+      document.querySelectorAll('.phone-link').forEach(a => a.href = 'tel:+1' + fwd.slice(-10));
+      if (g.formatted) document.querySelectorAll('.phone-text').forEach(el => el.textContent = g.formatted);
+    };
+    window.thApplyForwardingNumber();
+
     const form = document.getElementById('quoteForm');
     const btn = document.getElementById('submitBtn');
     const msg = document.getElementById('formMsg');
@@ -427,6 +458,16 @@
         });
         const d = await r.json().catch(() => ({}));
         if (!r.ok) throw new Error(d.error || 'Something went wrong.');
+        // Google Ads "Website quote form" conversion. Fires only when the backend
+        // confirms the email was actually sent (sent: true), never on page load,
+        // button click, a failed submission, or a blocked spam submission.
+        if (d.sent === true && typeof gtag === 'function') {
+          gtag('event', 'conversion', {
+            'send_to': 'AW-18554671497/0D_DCN-v1LQdEImjx49F',
+            'value': 1000.0,
+            'currency': 'USD'
+          });
+        }
         form.reset();
         show('ok', 'Thanks, ' + data.name.split(' ')[0] + '! We got your request and will be in touch soon.');
         btn.textContent = 'Sent ✓';
