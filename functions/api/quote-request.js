@@ -25,6 +25,7 @@ export async function onRequestPost({ request, env }) {
   const email = clip(body.email, 200);
   const address = clip(body.address, 300);
   const details = clip(body.details, 3000);
+  const page = clip(body.page, 100);
   const services = (Array.isArray(body.services) ? body.services : [])
     .map(s => clip(s, 60)).filter(Boolean).slice(0, 10);
 
@@ -43,7 +44,8 @@ export async function onRequestPost({ request, env }) {
     'Phone: ' + phone + '\n' +
     'Email: ' + (email || '(not given)') + '\n' +
     'Property: ' + address + '\n' +
-    'Services: ' + (services.length ? services.join(', ') : '(none checked)') + '\n\n' +
+    'Services: ' + (services.length ? services.join(', ') : '(none checked)') + '\n' +
+    'Sent from: treehombres.com' + (page || '/') + '\n\n' +
     'Details:\n' + (details || '(none)') + '\n\n' +
     (emailOk ? 'Reply to this email to answer the customer directly.' : 'No email given. Call or text them back.');
 
