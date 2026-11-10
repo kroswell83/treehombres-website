@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://treehombres.com/sitemap.xml
