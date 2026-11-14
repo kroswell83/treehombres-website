@@ -203,3 +203,33 @@ footer{background:var(--forest);color:#cfd2bd;padding:40px 0 30px;font-size:15px
 section.tight{padding:56px 0}
 /* keep the sticky header from covering the form when jumping to #quote on new pages */
 .page-hero #quote,section#quote.tight{scroll-margin-top:84px}
+
+/* ===== photos, owners, FAQ (Nov 14) ===== */
+.photo{margin:0;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.photo img{width:100%;height:auto;display:block}
+.photo figcaption{padding:10px 14px;font-size:14px;color:var(--muted)}
+.photo figcaption b{color:var(--forest)}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ba .tag{display:inline-block;font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#fff;background:var(--bark);padding:3px 9px;border-radius:999px;margin-right:6px}
+.ba figure:last-child .tag{background:var(--olive)}
+@media(max-width:640px){.ba{grid-template-columns:1fr}}
+.work-grid{display:grid;grid-template-columns:2fr 1fr;gap:14px;align-items:start}
+@media(max-width:820px){.work-grid{grid-template-columns:1fr}}
+.meet{display:grid;grid-template-columns:minmax(0,420px) 1fr;gap:36px;align-items:center}
+.meet h2{font-size:clamp(28px,4vw,38px);color:var(--forest);margin-bottom:12px}
+.meet p{color:#3f4a3a;margin:0 0 12px;font-size:18px}
+@media(max-width:820px){.meet{grid-template-columns:1fr;gap:20px}.meet .photo{max-width:440px}}
+.faq{display:grid;gap:10px;max-width:860px}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:0 20px}
+.faq summary{cursor:pointer;list-style:none;padding:18px 28px 18px 0;font-weight:700;color:var(--forest);font-size:17px;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:0;top:14px;font-size:24px;font-weight:700;color:var(--olive)}
+.faq details[open] summary::after{content:"–"}
+.faq details p{margin:0 0 18px;color:#3f4a3a}
+.faq a{color:var(--olive);font-weight:700}
+.alert{background:#fdf3e7;border:1px solid #efcf9f;border-left:5px solid #c4761c;border-radius:12px;padding:18px 20px;margin-top:24px}
+.alert h3{font-size:18px;color:#7a4510;margin-bottom:6px}
+.alert p{margin:0;color:#4a3a28}
+.drivers{counter-reset:none}
+.inline-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.inline-cta .btn-light{border:1px solid var(--line)}
