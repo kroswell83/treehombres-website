@@ -255,3 +255,15 @@ select:focus{outline:2px solid var(--olive);outline-offset:1px;border-color:var(
   .page-hero .hero-pitch p.lead{margin-top:6px}
 }
 @media(min-width:821px){.page-hero .wrap{grid-template-rows:auto 1fr}.hero-pitch{align-self:start}}
+
+/* ===== Nov 15b: Call-only banner, no bottom bar, trust line under the title ===== */
+.header-call{padding:10px 18px;font-size:16px;white-space:nowrap}
+.header-call .hc-short{display:none}
+@media(max-width:560px){
+  .header-call{padding:10px 14px;font-size:15px}
+  .header-call .hc-short{display:inline}
+  .header-call .hc-long{display:none}
+}
+.hero-title .trust{margin:12px 0 0;gap:6px 16px;font-size:15px}
+@media(max-width:820px){.hero-title .trust{font-size:14px;margin-top:8px;gap:4px 12px}}
+@media(min-width:821px){.hero-pitch p.lead{margin-top:22px}}
