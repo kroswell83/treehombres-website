@@ -42,7 +42,7 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/site.css?v=20261115c" />
+  <link rel="stylesheet" href="/assets/site.css?v=20261115d" />
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -101,7 +101,10 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
       <img src="/logo.jpg" alt="" width="48" height="48" />
       <span>Tree Hombres</span>
     </a>
-    <a href="tel:+15128878722" class="btn btn-light header-call phone-link" aria-label="Call Tree Hombres">📞 Call</a>
+    <div class="header-ctas">
+      <a href="tel:+15128878722" class="btn btn-light header-call phone-link" aria-label="Call Tree Hombres">📞 Call</a>
+      <a href="#quote" class="btn btn-primary header-quote">Get a Quote</a>
+    </div>
   </div>
 </header>
 
@@ -127,18 +130,6 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
         </div>
         <label for="f-address">Property address or town</label>
         <input id="f-address" name="address" autocomplete="street-address" required />
-        <label for="f-service">What do you need? <span class="opt">(optional)</span></label>
-        <select id="f-service" name="services">
-          <option value="">Choose one</option>
-          <option>Tree Removal</option>
-          <option>Tree Trimming</option>
-          <option>Emergency / Storm Damage</option>
-          <option>Hazard Limb Removal</option>
-          <option>Mistletoe Removal</option>
-          <option>Not sure yet</option>
-        </select>
-        <label for="f-email">Email <span class="opt">(optional)</span></label>
-        <input id="f-email" name="email" type="email" autocomplete="email" />
         <label for="f-details">Tell us about the job <span class="opt">(optional)</span></label>
         <textarea id="f-details" name="details" rows="3" placeholder="How many trees, what kind, anything over the house..."></textarea>
 
@@ -200,6 +191,6 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
   </div>
 </footer>
 
-<script src="/assets/site.js?v=20261115c"></script>
+<script src="/assets/site.js?v=20261115d"></script>
 </body>
 </html>
