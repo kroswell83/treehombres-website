@@ -267,3 +267,6 @@ select:focus{outline:2px solid var(--olive);outline-offset:1px;border-color:var(
 .hero-title .trust{margin:12px 0 0;gap:6px 16px;font-size:15px}
 @media(max-width:820px){.hero-title .trust{font-size:14px;margin-top:8px;gap:4px 12px}}
 @media(min-width:821px){.hero-pitch p.lead{margin-top:22px}}
+/* banner Call: the light button style from the old bottom bar */
+.header-call{padding:10px 20px;font-size:16px}
+.header-call .hc-short,.header-call .hc-long{display:inline}
