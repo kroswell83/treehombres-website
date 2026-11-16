@@ -270,3 +270,11 @@ select:focus{outline:2px solid var(--olive);outline-offset:1px;border-color:var(
 /* banner Call: the light button style from the old bottom bar */
 .header-call{padding:10px 20px;font-size:16px}
 .header-call .hc-short,.header-call .hc-long{display:inline}
+
+/* ===== Nov 15c: Call + Get a Quote in the banner ===== */
+.header-ctas{display:flex;gap:8px;align-items:center}
+.header-quote{padding:10px 18px;font-size:16px;white-space:nowrap}
+@media(max-width:560px){
+  .brand span{display:none}                       /* logo badge only on phones: it already says Tree Hombres */
+  .header-call,.header-quote{padding:10px 14px;font-size:15px}
+}
