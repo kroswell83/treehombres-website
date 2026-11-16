@@ -278,3 +278,7 @@ select:focus{outline:2px solid var(--olive);outline-offset:1px;border-color:var(
   .brand span{display:none}                       /* logo badge only on phones: it already says Tree Hombres */
   .header-call,.header-quote{padding:10px 14px;font-size:15px}
 }
+/* privacy policy page */
+.policy h2{font-size:22px;color:var(--forest);margin:28px 0 10px}
+.policy ul{margin:0 0 14px;padding-left:22px;color:#3f4a3a}
+.policy li{margin-bottom:6px}
