@@ -106,7 +106,7 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
       <a href="/tree-trimming">Tree Trimming</a>
       <a href="/about" aria-current="page">About</a>
       <a href="tel:+15128878722" class="phone-link phone-text" data-phone-show>(512) 887-8722</a>
-      <a href="/free-quote" class="btn btn-primary">Get a Quote</a>
+      <a href="#quote" class="btn btn-primary">Get a Quote</a>
     </nav>
   </div>
 </header>
@@ -117,14 +117,57 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
 </nav>
 
 <main id="top">
-  <div class="hero page-head">
+  <div class="hero page-hero">
     <div class="wrap">
-      <span class="eyebrow">About us</span>
-      <h1>Locally Owned Tree Service in Georgetown, TX</h1>
-      <p class="lead">When we say local, we mean local. Tree Hombres is locally owned and operated by a couple of hombres who were raised in the Georgetown area.</p>
-      <div class="hero-ctas">
-        <a href="tel:+15128878722" class="btn btn-light btn-call phone-link">📞 Call <span class="phone-text">(512) 887-8722</span></a>
-        <a href="/free-quote" class="btn btn-outline">Get a Free Quote</a>
+      <div class="hero-title">
+        <span class="eyebrow">About us</span>
+        <h1>Locally Owned Tree Service in Georgetown, TX</h1>
+      </div>
+      <div id="quote" class="hero-form">
+      <form class="card" id="quoteForm" novalidate>
+        <span class="form-kicker">Get started</span>
+        <p class="form-title">Request a free quote</p>
+        <p class="form-sub">Takes about 30 seconds.</p>
+        <div class="frow">
+          <div><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required /></div>
+          <div><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" required /></div>
+        </div>
+        <label for="f-address">Property address or town</label>
+        <input id="f-address" name="address" autocomplete="street-address" required />
+        <label for="f-service">What do you need? <span class="opt">(optional)</span></label>
+        <select id="f-service" name="services">
+          <option value="">Choose one</option>
+          <option>Tree Removal</option>
+          <option>Tree Trimming</option>
+          <option>Emergency / Storm Damage</option>
+          <option>Hazard Limb Removal</option>
+          <option>Mistletoe Removal</option>
+          <option>Not sure yet</option>
+        </select>
+        <label for="f-email">Email <span class="opt">(optional)</span></label>
+        <input id="f-email" name="email" type="email" autocomplete="email" />
+        <label for="f-details">Tell us about the job <span class="opt">(optional)</span></label>
+        <textarea id="f-details" name="details" rows="3" placeholder="How many trees, what kind, anything over the house..."></textarea>
+
+        <!-- spam trap: real people never see or fill this -->
+        <div class="hp" aria-hidden="true"><label for="f-website">Website</label><input id="f-website" name="website" tabindex="-1" autocomplete="off" /></div>
+
+        <button type="submit" class="btn btn-primary" id="submitBtn">Get My Free Quote</button>
+        <div id="formMsg" role="status" aria-live="polite"></div>
+        <p class="form-note">We'll call or text you back to set up a time to look at your trees.</p>
+      </form>
+      </div>
+      <div class="hero-pitch">
+        <p class="lead">When we say local, we mean local. Tree Hombres is locally owned and operated by a couple of hombres who were raised in the Georgetown area.</p>
+        <p class="call-line" data-phone-show><b>Rather talk to someone?</b> Call us.</p>
+        <div class="hero-ctas" style="margin-top:10px">
+          <a href="tel:+15128878722" class="btn btn-light btn-call phone-link">📞 Call <span class="phone-text">(512) 887-8722</span></a>
+        </div>
+        <ul class="trust">
+          <li>Locally owned</li>
+          <li>Fully insured</li>
+          <li>Free, upfront quotes</li>
+        </ul>
       </div>
     </div>
     <svg class="ridge" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
@@ -191,11 +234,11 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
       <div class="cta-band">
         <div>
           <h2>Let's take a look at your trees</h2>
-          <p>Call us or request a free quote online.</p>
+          <p>Call us or request a free quote at the top of the page.</p>
         </div>
         <div class="hero-ctas">
           <a href="tel:+15128878722" class="btn btn-light phone-link">📞 Call <span class="phone-text">(512) 887-8722</span></a>
-          <a href="/free-quote" class="btn btn-outline">Get a Free Quote</a>
+          <a href="#quote" class="btn btn-outline">Get a Free Quote</a>
         </div>
       </div>
     </div>
@@ -226,7 +269,7 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
 
 <div class="mobile-bar" id="mobileBar">
   <a href="tel:+15128878722" class="btn btn-light phone-link">📞 Call</a>
-  <a href="/free-quote" class="btn btn-primary">Get a Quote</a>
+  <a href="#quote" class="btn btn-primary">Get a Quote</a>
 </div>
 
 <script src="/assets/site.js"></script>

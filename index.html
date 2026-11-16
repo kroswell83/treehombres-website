@@ -101,19 +101,59 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
 </nav>
 
 <main id="top">
-  <!-- HERO -->
-  <div class="hero">
+  <!-- HERO: headline, then quote form (phones), headline beside form (desktop) -->
+  <div class="hero page-hero">
     <div class="wrap">
-      <div>
+      <div class="hero-title">
         <span class="eyebrow">Locally owned · Georgetown, Texas</span>
         <h1>Tree Service in Georgetown, TX</h1>
-        <p class="lead">Tree trimming, tree removal, and storm cleanup for Georgetown homeowners and the surrounding areas. Honest quotes, careful work, and a clean yard when we leave.</p>
-        <div class="hero-ctas">
-          <a href="#quote" class="btn btn-light">Request a Quote</a>
-          <a href="" class="btn btn-outline phone-link" data-phone-show>📞 Call <span class="phone-text"></span></a>
-        </div>
       </div>
-      <div class="hero-logo"><img src="/logo.jpg" alt="Tree Hombres Tree Service logo" width="380" height="376" /></div>
+      <div id="quote" class="hero-form">
+      <form class="card" id="quoteForm" novalidate>
+        <span class="form-kicker">Get started</span>
+        <p class="form-title">Request a quote</p>
+        <p class="form-sub">Tell us a little about the job and we'll get back to you to set up a time to look at your trees.</p>
+        <div class="frow">
+          <div><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required /></div>
+          <div><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" required /></div>
+        </div>
+        <label for="f-address">Property address or town</label>
+        <input id="f-address" name="address" autocomplete="street-address" required />
+        <label for="f-service">What do you need? <span class="opt">(optional)</span></label>
+        <select id="f-service" name="services">
+          <option value="">Choose one</option>
+          <option>Tree Removal</option>
+          <option>Tree Trimming</option>
+          <option>Emergency / Storm Damage</option>
+          <option>Hazard Limb Removal</option>
+          <option>Mistletoe Removal</option>
+          <option>Not sure yet</option>
+        </select>
+        <label for="f-email">Email <span class="opt">(optional)</span></label>
+        <input id="f-email" name="email" type="email" autocomplete="email" />
+        <label for="f-details">Tell us about the job <span class="opt">(optional)</span></label>
+        <textarea id="f-details" name="details" rows="3" placeholder="How many trees, what kind, anything over the house..."></textarea>
+
+        <!-- spam trap: real people never see or fill this -->
+        <div class="hp" aria-hidden="true"><label for="f-website">Website</label><input id="f-website" name="website" tabindex="-1" autocomplete="off" /></div>
+
+        <button type="submit" class="btn btn-primary" id="submitBtn">Get My Free Quote</button>
+        <div id="formMsg" role="status" aria-live="polite"></div>
+        <p class="form-note">We'll call or text you back to set up a time to look at your trees.</p>
+      </form>
+      </div>
+      <div class="hero-pitch">
+        <p class="lead">Tree trimming, tree removal, and storm cleanup for Georgetown homeowners and the surrounding areas. Honest quotes, careful work, and a clean yard when we leave.</p>
+        <p class="call-line" data-phone-show><b>Rather talk to someone?</b> Call us.</p>
+        <div class="hero-ctas" style="margin-top:10px">
+          <a href="tel:+15128878722" class="btn btn-light btn-call phone-link">📞 Call <span class="phone-text">(512) 887-8722</span></a>
+        </div>
+        <ul class="trust">
+          <li>Locally owned</li>
+          <li>Fully insured</li>
+          <li>Free, upfront quotes</li>
+        </ul>
+      </div>
     </div>
     <svg class="ridge" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
       <path d="M0,40 C180,10 320,55 520,32 C720,8 880,50 1080,28 C1240,12 1340,30 1440,22 L1440,60 L0,60 Z" fill="#fbf8f0"/>
@@ -210,51 +250,6 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     </div>
   </section>
 
-  <!-- QUOTE FORM -->
-  <section id="quote" class="quote">
-    <div class="wrap quote-grid">
-      <div class="quote-side">
-        <span class="kicker">Get started</span>
-        <h2>Request a quote</h2>
-        <p>Tell us a little about the job and we'll get back to you to set up a time to look at your trees.</p>
-        <div class="call-card" data-phone-show>
-          <b>Rather talk to someone?</b>
-          <a href="" class="btn btn-primary phone-link">📞 Call <span class="phone-text"></span></a>
-          <a href="" class="btn btn-light sms-link" style="border:1px solid var(--line)">💬 Send a text</a>
-        </div>
-      </div>
-
-      <form class="card" id="quoteForm" novalidate>
-        <div class="frow">
-          <div><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required /></div>
-          <div><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" required /></div>
-        </div>
-        <label for="f-email">Email <span class="opt">(optional)</span></label>
-        <input id="f-email" name="email" type="email" autocomplete="email" />
-        <label for="f-address">Property address or town</label>
-        <input id="f-address" name="address" autocomplete="street-address" required />
-
-        <label>What do you need? <span class="opt">(check any)</span></label>
-        <div class="checks">
-          <label><input type="checkbox" name="services" value="Tree Trimming" /> Tree Trimming</label>
-          <label><input type="checkbox" name="services" value="Tree Removal" /> Tree Removal</label>
-          <label><input type="checkbox" name="services" value="Hazard Limb Removal" /> Hazard Limb Removal</label>
-          <label><input type="checkbox" name="services" value="Storm Cleanup" /> Storm Cleanup</label>
-          <label><input type="checkbox" name="services" value="Mistletoe Removal" /> Mistletoe Removal</label>
-          <label><input type="checkbox" name="services" value="Not sure" /> Not sure yet</label>
-        </div>
-
-        <label for="f-details">Tell us about the job <span class="opt">(optional)</span></label>
-        <textarea id="f-details" name="details" rows="4" placeholder="How many trees, what kind, anything hanging over the house..."></textarea>
-
-        <!-- spam trap: real people never see or fill this -->
-        <div class="hp" aria-hidden="true"><label for="f-website">Website</label><input id="f-website" name="website" tabindex="-1" autocomplete="off" /></div>
-
-        <button type="submit" class="btn btn-primary" id="submitBtn">Send My Request</button>
-        <div id="formMsg" role="status" aria-live="polite"></div>
-      </form>
-    </div>
-  </section>
 </main>
 
 <footer>

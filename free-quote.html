@@ -117,13 +117,57 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
 </nav>
 
 <main id="top">
-  <div class="hero page-head">
+  <div class="hero page-hero">
     <div class="wrap">
-      <span class="eyebrow">Locally owned · Georgetown, Texas</span>
-      <h1>Free Tree Service Quote in Georgetown, TX</h1>
-      <p class="lead">Tell us about your trees and we'll get back to you to set up a time to look. Rather talk now? Give us a call.</p>
-      <div class="hero-ctas">
-        <a href="tel:+15128878722" class="btn btn-light btn-call phone-link">📞 Call <span class="phone-text">(512) 887-8722</span></a>
+      <div class="hero-title">
+        <span class="eyebrow">Locally owned · Georgetown, Texas</span>
+        <h1>Free Tree Service Quote in Georgetown, TX</h1>
+      </div>
+      <div id="quote" class="hero-form">
+      <form class="card" id="quoteForm" novalidate>
+        <span class="form-kicker">Get started</span>
+        <p class="form-title">Request a free quote</p>
+        <p class="form-sub">Takes about 30 seconds.</p>
+        <div class="frow">
+          <div><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required /></div>
+          <div><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" required /></div>
+        </div>
+        <label for="f-address">Property address or town</label>
+        <input id="f-address" name="address" autocomplete="street-address" required />
+        <label for="f-service">What do you need? <span class="opt">(optional)</span></label>
+        <select id="f-service" name="services">
+          <option value="">Choose one</option>
+          <option>Tree Removal</option>
+          <option>Tree Trimming</option>
+          <option>Emergency / Storm Damage</option>
+          <option>Hazard Limb Removal</option>
+          <option>Mistletoe Removal</option>
+          <option>Not sure yet</option>
+        </select>
+        <label for="f-email">Email <span class="opt">(optional)</span></label>
+        <input id="f-email" name="email" type="email" autocomplete="email" />
+        <label for="f-details">Tell us about the job <span class="opt">(optional)</span></label>
+        <textarea id="f-details" name="details" rows="3" placeholder="How many trees, what kind, anything over the house..."></textarea>
+
+        <!-- spam trap: real people never see or fill this -->
+        <div class="hp" aria-hidden="true"><label for="f-website">Website</label><input id="f-website" name="website" tabindex="-1" autocomplete="off" /></div>
+
+        <button type="submit" class="btn btn-primary" id="submitBtn">Get My Free Quote</button>
+        <div id="formMsg" role="status" aria-live="polite"></div>
+        <p class="form-note">We'll call or text you back to set up a time to look at your trees.</p>
+      </form>
+      </div>
+      <div class="hero-pitch">
+        <p class="lead">Tell us about your trees and we'll get back to you to set up a time to look. Rather talk now? Give us a call.</p>
+        <p class="call-line" data-phone-show><b>Rather talk to someone?</b> Call us.</p>
+        <div class="hero-ctas" style="margin-top:10px">
+          <a href="tel:+15128878722" class="btn btn-light btn-call phone-link">📞 Call <span class="phone-text">(512) 887-8722</span></a>
+        </div>
+        <ul class="trust">
+          <li>Locally owned</li>
+          <li>Fully insured</li>
+          <li>Free, upfront quotes</li>
+        </ul>
       </div>
     </div>
     <svg class="ridge" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
@@ -131,46 +175,17 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     </svg>
   </div>
 
-  <section id="quote" class="tight">
-    <div class="wrap quote-grid">
-      <div class="quote-side">
-        <span class="kicker">Request a quote</span>
-        <h2>What happens next</h2>
-      <ol class="steps" style="grid-template-columns:1fr">
+  <section class="tight">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">What happens next</span>
+        <h2>From request to clean yard</h2>
+      </div>
+      <ol class="steps">
         <li><b>Call or request a quote</b><span>Tell us what's going on with your trees. Photos help if you have them.</span></li>
         <li><b>We look and quote up front</b><span>We come out, look at the actual trees, and give you a clear price before any work starts.</span></li>
         <li><b>We do the work and clean up</b><span>We protect your lawn, beds, and structures, and leave the yard clean when we're done.</span></li>
       </ol>
-      </div>
-      <form class="card" id="quoteForm" novalidate>
-        <div class="frow">
-          <div><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required /></div>
-          <div><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" required /></div>
-        </div>
-        <label for="f-email">Email <span class="opt">(optional)</span></label>
-        <input id="f-email" name="email" type="email" autocomplete="email" />
-        <label for="f-address">Property address or town</label>
-        <input id="f-address" name="address" autocomplete="street-address" required />
-
-        <label>What do you need? <span class="opt">(check any)</span></label>
-        <div class="checks">
-          <label><input type="checkbox" name="services" value="Tree Trimming" /> Tree Trimming</label>
-          <label><input type="checkbox" name="services" value="Tree Removal" /> Tree Removal</label>
-          <label><input type="checkbox" name="services" value="Hazard Limb Removal" /> Hazard Limb Removal</label>
-          <label><input type="checkbox" name="services" value="Storm Cleanup" /> Storm Cleanup</label>
-          <label><input type="checkbox" name="services" value="Mistletoe Removal" /> Mistletoe Removal</label>
-          <label><input type="checkbox" name="services" value="Not sure" /> Not sure yet</label>
-        </div>
-
-        <label for="f-details">Tell us about the job <span class="opt">(optional)</span></label>
-        <textarea id="f-details" name="details" rows="4" placeholder="How many trees, what kind, anything hanging over the house..."></textarea>
-
-        <!-- spam trap: real people never see or fill this -->
-        <div class="hp" aria-hidden="true"><label for="f-website">Website</label><input id="f-website" name="website" tabindex="-1" autocomplete="off" /></div>
-
-        <button type="submit" class="btn btn-primary" id="submitBtn">Send My Request</button>
-        <div id="formMsg" role="status" aria-live="polite"></div>
-      </form>
     </div>
   </section>
 </main>
