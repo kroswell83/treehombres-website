@@ -36,6 +36,50 @@
   };
   window.thApplyForwardingNumber();
 
+  // "Get a Quote" links (header button, photo, etc.): bring the form into view,
+  // put the cursor in "Your name" (opens the keyboard on phones) and pulse the card.
+  // Focus happens right in the tap, because phones only open the keyboard then.
+  document.addEventListener('click', function (ev) {
+    const a = ev.target.closest && ev.target.closest('a[href="#quote"]');
+    if (!a) return;
+    const box = document.getElementById('quote');
+    const field = box && box.querySelector('input[name="name"]');
+    const card = box && (box.querySelector('form.card') || box);
+    if (!field || !card) return; // no form here: let the link work normally
+    ev.preventDefault();
+
+    const header = document.querySelector('header');
+    const top = header ? header.getBoundingClientRect().bottom : 0;
+    const r = field.getBoundingClientRect();
+    const inView = r.top >= top && r.bottom <= window.innerHeight;
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function pulse() {
+      card.classList.remove('quote-pulse');
+      void card.offsetWidth; // restart the animation if tapped again
+      card.classList.add('quote-pulse');
+    }
+    try { field.focus({ preventScroll: true }); } catch (e) { field.focus(); }
+
+    if (inView) { pulse(); return; }
+    box.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    // Pulse once the page stops scrolling (watch the position; works in every browser).
+    let done = false, last = -1, still = 0;
+    const finish = function () { if (!done) { done = true; pulse(); } };
+    const watch = function () {
+      if (done) return;
+      const y = window.scrollY;
+      still = (y === last) ? still + 1 : 0;
+      last = y;
+      if (still >= 4) finish(); else requestAnimationFrame(watch);
+    };
+    setTimeout(function () { requestAnimationFrame(watch); }, 120);
+    setTimeout(finish, 2500); // never wait longer than this
+  });
+  document.addEventListener('animationend', function (ev) {
+    if (ev.animationName === 'quotePulse') ev.target.classList.remove('quote-pulse');
+  });
+
   // Quote form (one per page, id="quoteForm")
   const form = document.getElementById('quoteForm');
   if (!form) return;
