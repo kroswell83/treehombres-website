@@ -9,9 +9,12 @@
 //   2. Cloudflare's request.cf.city   (only if the visitor is in Texas, US)
 //   3. Otherwise the default H1 stays.
 //
+// Keyword echo (Nov 24): ?kw=<Google Ads keyword> -> "<Keyword> in <City>, TX" (see parseKeyword).
+// A town inside the keyword wins over loc. No valid kw = the city behavior above, unchanged.
+//
 // _routes.json limits this to the landing pages and /api/*, so CSS, images, etc. never run it.
 
-const PAGES = new Set(['/', '/tree-removal', '/emergency-tree-removal', '/tree-trimming']);
+const PAGES = new Set(['/', '/tree-service', '/tree-removal', '/emergency-tree-removal', '/tree-trimming']);
 
 const CITIES = ['Georgetown', 'Round Rock', 'Cedar Park', 'Leander', 'Hutto',
   'Liberty Hill', 'Jarrell', 'Florence', 'Pflugerville', 'Austin'];
@@ -63,6 +66,56 @@ export function pickCity(url, cf) {
   return null;
 }
 
+// ---------- Keyword echo: ?kw=<Google Ads keyword> ----------
+// Ads final URL suffix adds kw={keyword}. Returns null (= ignore kw) if any check fails.
+const KW_NEED = ['tree', 'trimming', 'trimmer', 'trimmers', 'pruning', 'removal', 'cutting'];
+const KW_BLOCK = ['cheap', 'free', 'price', 'prices', 'cost', 'costs', 'arborist', 'arborists'];
+
+export function parseKeyword(url) {
+  // URLSearchParams already turns both %20 and + into spaces.
+  const raw = url.searchParams.get('kw');
+  if (raw == null) return null;
+  const s = raw.replace(/\s+/g, ' ').trim().toLowerCase();
+  if (!s || s.length > 40 || !/^[a-z ]+$/.test(s)) return null; // letters and spaces only, 40 max
+
+  const words = s.split(' ');
+  // "tree" also counts inside "trees" / "treeservice"
+  const hasNeed = words.some(w => KW_NEED.includes(w) || w.startsWith('tree'));
+  if (!hasNeed || words.some(w => KW_BLOCK.includes(w))) return null;
+
+  let k = ' ' + s + ' ';
+  k = k.replace(/ treeservices? /g, m => m.includes('services') ? ' tree services ' : ' tree service ');
+  k = k.replace(/ tx $/, ' ');                       // drop a trailing "tx"
+
+  // A town in the keyword wins over loc / Cloudflare. Take the first one that appears.
+  let town = null, at = Infinity;
+  for (const c of CITIES) {
+    const i = k.indexOf(' ' + c.toLowerCase() + ' ');
+    if (i !== -1 && i < at) { town = c; at = i; }
+  }
+  if (town) k = k.replace(' ' + town.toLowerCase() + ' ', ' ');
+  k = k.replace(/ tx $/, ' ');                       // "georgetown tx" -> drop the tx left behind
+
+  k = k.replace(/ near me /g, ' near you ');
+  k = k.replace(/\s+/g, ' ').trim();
+  k = k.replace(/^(in )+/, '').replace(/( in)+$/, '').trim(); // "tree service in <town>" leaves a dangling "in"
+  if (!k) return null;
+
+  const title = k.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  return { text: title, town };
+}
+
+// The H1 text for this request, or null to leave the page's default H1 alone.
+export function buildH1(svc, url, cf) {
+  const kw = parseKeyword(url);
+  if (kw) {
+    const city = kw.town || pickCity(url, cf);
+    return kw.text + (city ? ' in ' + city + ', TX' : ' in Williamson & Travis County');
+  }
+  const city = pickCity(url, cf); // no usable kw: today's behavior
+  return city ? svc + ' in ' + city + ', TX' : null;
+}
+
 export async function onRequest(context) {
   const { request, next } = context;
   const url = new URL(request.url);
@@ -85,17 +138,19 @@ export async function onRequest(context) {
     const type = res.headers.get('Content-Type') || '';
     if (res.status !== 200 || !type.includes('text/html')) return res;
 
-    const city = pickCity(url, request.cf);
     const out = new Response(res.body, res);
     out.headers.set('Cache-Control', 'private, no-cache');
     out.headers.delete('ETag');
-    if (!city) return out;
+    // Quick check: nothing to change when there's no usable kw and no city.
+    if (!parseKeyword(url) && !pickCity(url, request.cf)) return out;
 
     return new HTMLRewriter()
       .on('h1[data-svc]', {
         element(el) {
           const svc = el.getAttribute('data-svc');
-          if (svc) el.setInnerContent(svc + ' in ' + city + ', TX'); // plain text, escaped
+          if (!svc) return;
+          const text = buildH1(svc, url, request.cf);
+          if (text) el.setInnerContent(text); // plain text, escaped
         },
       })
       .transform(out);
