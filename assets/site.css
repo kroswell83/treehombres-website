@@ -323,3 +323,6 @@ section.callout-sec{padding:0}
 }
 a.photo-link{display:block;border-radius:inherit;cursor:pointer}
 a.photo-link:focus-visible{outline:3px solid var(--olive);outline-offset:3px}
+
+/* ---- Nov 24: /tree-service 2x2 service cards ---- */
+@media(min-width:821px){.covers.covers-2{grid-template-columns:repeat(2,1fr)}}
